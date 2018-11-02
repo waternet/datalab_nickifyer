@@ -20,13 +20,9 @@ private slots:
     void on_actionSelect_Directory_triggered();
 
     void on_btnNext_clicked();
-
     void on_btnBack_clicked();
-
     void on_btnFirst_clicked();
-
     void on_btnLast_clicked();
-
     void on_rbNegative_clicked();
 
 private:

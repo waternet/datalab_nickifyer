@@ -2,6 +2,8 @@
 #include <QMouseEvent>
 #include <QDateTime>
 #include <QDir>
+#include <QScrollBar>
+#include <QDebug>
 
 SelectionGraphicsView::SelectionGraphicsView(QWidget *parent) : QGraphicsView(parent)
 {
@@ -28,17 +30,24 @@ void SelectionGraphicsView::showImage(const QString filename)
 void SelectionGraphicsView::mousePressEvent(QMouseEvent *evt)
 {
     m_mousedown = evt->pos();
+    m_mousedown.setX(m_mousedown.x() + horizontalScrollBar()->value());
+    m_mousedown.setY(m_mousedown.y() + verticalScrollBar()->value());
 
     if(m_selection_rect==NULL){
         m_selection_rect = m_scene->addRect(m_mousedown.x(), m_mousedown.y(), 1, 1, QPen(Qt::black));;
     }else{
        m_selection_rect->setRect(m_mousedown.x(), m_mousedown.y(), 1, 1);
     }
+
+    qDebug() << horizontalScrollBar()->value();
 }
 
 void SelectionGraphicsView::mouseMoveEvent(QMouseEvent *evt)
 {
     m_mousecurrent = evt->pos();
+    m_mousecurrent.setX(m_mousecurrent.x() + horizontalScrollBar()->value());
+    m_mousecurrent.setY(m_mousecurrent.y() + verticalScrollBar()->value());
+
     if(m_selection_rect!=NULL){
         int w = m_mousecurrent.x() - m_mousedown.x();
         int h = m_mousecurrent.y() - m_mousedown.y();

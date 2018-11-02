@@ -8,8 +8,6 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 
-const QString IMGPATH = "../img/";
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
